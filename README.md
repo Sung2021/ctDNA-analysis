@@ -36,7 +36,7 @@ UMI extraction (UMI-tools)
   ↓
 Alignment → BAM
   ↓
-UMI deduplication (UMI-tools or fgbio)
+UMI deduplication (UMI-tools or fgbio) (I simulated data as outputs of this stage)
   ↓
 Variant calling (MuTect2, VarDict)
   ↓
