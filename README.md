@@ -1,9 +1,5 @@
 # ctDNA-analysis
 
-(Version1 on 25.11.29)
-
-# ctDNA-analysis
-
 **Version 1 — 2025.11.29**
 
 ## Project Structure
