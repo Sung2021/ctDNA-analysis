@@ -26,3 +26,22 @@ ctDNA-analysis/
 └── docs/                          # Documentation, reports, references
 ```
 
+
+
+## Workflow
+```
+Raw FASTQ (with UMI) 
+  ↓
+UMI extraction (UMI-tools)
+  ↓
+Alignment → BAM
+  ↓
+UMI deduplication (UMI-tools or fgbio)
+  ↓
+Variant calling (MuTect2, VarDict)
+  ↓
+VCF file
+  ↓
+Filtering & Annotation
+```
+
