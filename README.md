@@ -20,7 +20,7 @@ ctDNA-analysis/
 │
 ├── simulation/
 │   ├── generate_reads.py          # Synthetic read simulation (UMI-collapsed level data)
-│   └── visualize_synthetic_data.R # Noise modeling
+│   └── generate_reads.R           # R version
 │
 ├── data/                          # Raw / intermediate / processed data
 └── docs/                          # Documentation, reports, references
