@@ -1,0 +1,11 @@
+chrom,position,gene,variant_type,is_true_variant,true_vaf,n_unique_molecules,n_alt_molecules,n_ref_molecules,alt_reads,ref_reads,total_reads,vaf,vaf_percent,binomial_pval,log10_pval,pass_stringent,pass_sensitive,pass_depth_stringent,pass_depth_sensitive,pass_alt_reads_stringent,pass_alt_reads_sensitive,pass_vaf_stringent,pass_vaf_sensitive,pass_pval_stringent,pass_pval_sensitive,pass_umi_stringent,pass_umi_sensitive
+chr17,7578191,TP53,Y234H,True,0.005,549,4,545,378,55272,55650,0.006792452830188679,0.6792452830188679,0.0,-300.0,True,True,True,True,True,True,True,True,True,True,True,True
+chr17,7577548,TP53,R248Q,True,0.05,440,18,422,1839,42792,44631,0.041204543926866975,4.120454392686698,0.0,-300.0,True,True,True,True,True,True,True,True,True,True,True,True
+chr17,7578190,TP53,R175H,True,0.015,564,11,553,1167,54863,56030,0.020828127788684633,2.082812778868463,0.0,-300.0,True,True,True,True,True,True,True,True,True,True,True,True
+chr17,7577559,TP53,R248W,True,0.05,469,27,442,2585,44366,46951,0.05505740026836489,5.505740026836489,0.0,-300.0,True,True,True,True,True,True,True,True,True,True,True,True
+chr7,55086776,EGFR,E746-A750,True,0.015,645,14,631,1369,61611,62980,0.021737059383931407,2.1737059383931405,0.0,-300.0,True,True,True,True,True,True,True,True,True,True,True,True
+chr7,55191817,EGFR,L861Q,True,0.015,607,7,600,604,60907,61511,0.009819381899172506,0.9819381899172506,0.0,-300.0,True,True,True,True,True,True,True,True,True,True,True,True
+chr7,55191822,EGFR,L858R,True,0.05,397,23,374,2530,37138,39668,0.06377936876071393,6.377936876071392,0.0,-300.0,True,True,True,True,True,True,True,True,True,True,True,True
+chr12,25398284,KRAS,G12C,True,0.05,495,33,462,3293,45813,49106,0.06705901519162628,6.705901519162628,0.0,-300.0,True,True,True,True,True,True,True,True,True,True,True,True
+chr12,25398285,KRAS,G12V,True,0.05,364,18,346,1829,35982,37811,0.048372166829758534,4.837216682975853,0.0,-300.0,True,True,True,True,True,True,True,True,True,True,True,True
+chr12,25398286,KRAS,G13D,True,0.015,556,14,542,1363,53658,55021,0.02477235964449937,2.477235964449937,0.0,-300.0,True,True,True,True,True,True,True,True,True,True,True,True
