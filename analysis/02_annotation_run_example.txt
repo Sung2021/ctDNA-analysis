@@ -1,0 +1,12 @@
+# Perform VEP independently 
+vep \
+  --input_file results/mutect/sample.vcf.gz \
+  --output_file results/annot/sample_vep.txt \
+  --offline --everything --force_overwrite
+
+Rscript 02_annotation.R \
+  --input results/mutect/sample.vcf.gz \
+  --type vcf \
+  --annot results/annot/sample_vep.txt \
+  --out results/annot/sample_annotated.tsv
+
