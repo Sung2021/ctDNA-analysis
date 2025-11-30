@@ -51,9 +51,12 @@ def run_alignment(pairs, reference, out_dir, threads):
     for sample, r1, r2 in pairs:
         bam = os.path.join(out_dir, f"{sample}.sorted.bam")
 
+        rg = f"@RG\\tID:{sample}\\tSM:{sample}\\tPL:ILLUMINA"
+
         # BWA-MEM2 alignment command
         cmd_align = [
             "bwa-mem2", "mem",
+            "-R", rg,
             "-t", str(threads),
             reference, r1, r2
         ]
