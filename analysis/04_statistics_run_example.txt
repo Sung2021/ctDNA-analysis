@@ -1,0 +1,4 @@
+Rscript 04_statistics.R \
+  --detected results/filtered/sample.filtered.csv \
+  --truth simulation/truth_spikein.csv \
+  --outdir results/statistics
