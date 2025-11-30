@@ -42,8 +42,8 @@ Key features:
 
 Output example:  
 
-results/alignment/sample.sorted.bam
-results/alignment/sample.sorted.bam.bai
+- results/alignment/sample.sorted.bam
+- results/alignment/sample.sorted.bam.bai
 
 
 ---
@@ -57,9 +57,9 @@ UMI-aware deduplication using **UMI-tools**.
 
 Output example:  
 
-results/umi_dedup/sample.dedup.bam
-results/umi_dedup/sample.dedup.bam.bai
-results/umi_dedup/sample.dedup_metrics.txt
+- results/umi_dedup/sample.dedup.bam
+- results/umi_dedup/sample.dedup.bam.bai
+- results/umi_dedup/sample.dedup_metrics.txt
 
 
 
@@ -78,10 +78,10 @@ Features:
 
 Output example:  
 
-results/mutect/sample.vcf.gz
-results/mutect/sample.unfiltered.vcf.gz
-results/mutect/sample.f1r2.tar.gz
-results/mutect/sample.orientation-model.tar.gz
+- results/mutect/sample.vcf.gz
+- results/mutect/sample.unfiltered.vcf.gz
+- results/mutect/sample.f1r2.tar.gz
+- results/mutect/sample.orientation-model.tar.gz
 
 
 ---
