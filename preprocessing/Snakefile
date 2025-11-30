@@ -1,0 +1,117 @@
+# =============================
+# Snakemake Pipeline for ctDNA
+# =============================
+
+THREADS = 8
+
+FASTQ_DIR = "data/raw"
+REF = "refs/hg38.fa"
+
+PON = ""
+GERMLINE = ""
+INTERVALS = ""
+
+QC_DIR = "results/qc"
+ALIGN_DIR = "results/alignment"
+DEDUP_DIR = "results/umi_dedup"
+MUTECT_DIR = "results/mutect"
+
+# -----------------------------------
+# Sample list
+# -----------------------------------
+SAMPLES = [f.replace("_R1.fastq.gz", "") 
+           for f in glob_wildcards(FASTQ_DIR + "/{sample}_R1.fastq.gz").sample]
+
+# -----------------------------------
+# Rule order
+# -----------------------------------
+rule all:
+    input:
+        expand(f"{MUTECT_DIR}/{{sample}}.vcf.gz", sample=SAMPLES)
+
+# -----------------------------------
+# 01 FASTQC
+# -----------------------------------
+rule fastqc:
+    input:
+        fq = f"{FASTQ_DIR}/{{sample}}_R1.fastq.gz"
+    output:
+        directory = f"{QC_DIR}/{{sample}}_R1_fastqc"
+    threads: THREADS
+    shell:
+        """
+        fastqc {input.fq} -t {threads} -o {QC_DIR}
+        """
+
+# -----------------------------------
+# 02 Alignment (BWA-MEM2)
+# -----------------------------------
+rule alignment:
+    input:
+        r1 = f"{FASTQ_DIR}/{{sample}}_R1.fastq.gz",
+        r2 = f"{FASTQ_DIR}/{{sample}}_R2.fastq.gz"
+    output:
+        bam = f"{ALIGN_DIR}/{{sample}}.sorted.bam"
+    threads: THREADS
+    shell:
+        """
+        bwa-mem2 mem -R '@RG\\tID:{wildcards.sample}\\tSM:{wildcards.sample}\\tPL:ILLUMINA' \
+            -t {threads} {REF} {input.r1} {input.r2} |
+        samtools sort -@ {threads} -o {output.bam}
+        samtools index {output.bam}
+        """
+
+# -----------------------------------
+# 03 UMI-tools dedup
+# -----------------------------------
+rule umi_dedup:
+    input:
+        bam = f"{ALIGN_DIR}/{{sample}}.sorted.bam"
+    output:
+        dedup = f"{DEDUP_DIR}/{{sample}}.dedup.bam"
+    threads: THREADS
+    shell:
+        """
+        umi_tools dedup \
+            --extract-umi-method=tag \
+            --umi-tag=RX \
+            --method directional \
+            --threads {threads} \
+            --stdin {input.bam} \
+            --stdout {output.dedup} \
+            --log {DEDUP_DIR}/{wildcards.sample}.dedup_metrics.txt
+
+        samtools index -@ {threads} {output.dedup}
+        """
+
+# -----------------------------------
+# 04 Mutect2 Variant Calling
+# -----------------------------------
+rule mutect2:
+    input:
+        bam = f"{DEDUP_DIR}/{{sample}}.dedup.bam"
+    output:
+        vcf = f"{MUTECT_DIR}/{{sample}}.vcf.gz"
+    threads: THREADS
+    shell:
+        """
+        gatk Mutect2 \
+            -R {REF} \
+            -I {input.bam} \
+            -O {MUTECT_DIR}/{wildcards.sample}.unfiltered.vcf.gz \
+            --f1r2-tar-gz {MUTECT_DIR}/{wildcards.sample}.f1r2.tar.gz \
+            {('--panel-of-normals ' + PON) if PON else ''} \
+            {('--germline-resource ' + GERMLINE) if GERMLINE else ''} \
+            {('-L ' + INTERVALS) if INTERVALS else ''}
+
+        gatk LearnReadOrientationModel \
+            -I {MUTECT_DIR}/{wildcards.sample}.f1r2.tar.gz \
+            -O {MUTECT_DIR}/{wildcards.sample}.orientation-model.tar.gz
+
+        gatk FilterMutectCalls \
+            -R {REF} \
+            -V {MUTECT_DIR}/{wildcards.sample}.unfiltered.vcf.gz \
+            --orientation-bias-artifact-priors \
+            {MUTECT_DIR}/{wildcards.sample}.orientation-model.tar.gz \
+            -O {output.vcf}
+        """
