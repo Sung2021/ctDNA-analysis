@@ -1,0 +1,3 @@
+Rscript 01_filter_variants.R \
+  --vcf results/mutect/sample.vcf.gz \
+  --out results/filtered/sample.filtered.csv
