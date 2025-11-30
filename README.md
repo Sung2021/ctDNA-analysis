@@ -1,10 +1,6 @@
 # ctDNA-analysis
 
-This readme file indicates the plan only yet. <br>
-Each section will be updated. <br><br>
-
 **Version 1 — 2025.11.29** <br>
-Simulation folder was updated.
 
 ## Project Structure
 
