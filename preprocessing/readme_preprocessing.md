@@ -1,8 +1,6 @@
 
 # **README.md for `preprocessing/` **
 
-
-```markdown
 # Preprocessing Pipeline
 
 This directory contains the preprocessing components of the **ctDNA-analysis** workflow.  
@@ -43,12 +41,10 @@ Key features:
 - Assumes UMI extraction has already been performed.
 
 Output example:  
-```
 
 results/alignment/sample.sorted.bam
 results/alignment/sample.sorted.bam.bai
 
-```
 
 ---
 
@@ -60,13 +56,12 @@ UMI-aware deduplication using **UMI-tools**.
 - Generates metrics for each sample
 
 Output example:  
-```
 
 results/umi_dedup/sample.dedup.bam
 results/umi_dedup/sample.dedup.bam.bai
 results/umi_dedup/sample.dedup_metrics.txt
 
-```
+
 
 ---
 
@@ -82,14 +77,12 @@ Features:
   3. FilterMutectCalls  
 
 Output example:  
-```
 
 results/mutect/sample.vcf.gz
 results/mutect/sample.unfiltered.vcf.gz
 results/mutect/sample.f1r2.tar.gz
 results/mutect/sample.orientation-model.tar.gz
 
-````
 
 ---
 
@@ -143,5 +136,4 @@ This preprocessing module is complete at Version 1 and will be extended with:
 * fgbio support (optional)
 * Additional QC metrics for ultra-deep ctDNA
 
-```
 
